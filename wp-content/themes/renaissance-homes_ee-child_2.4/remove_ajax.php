@@ -1,0 +1,1 @@
+<a href="#" onClick="myfav_remove<?php echo $postid; ?>();return false">Remove from Favorites</a>
