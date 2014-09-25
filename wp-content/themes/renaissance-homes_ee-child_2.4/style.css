@@ -3702,3 +3702,71 @@ h3.footer-widget-title {
 .archive-post .title-link {
         color: #3e2c14;
 }
+
+
+/*------------------------------------------------*/
+/*---------[GIVING BACK BANNERS- 9/12/14]---------*/
+/*------------------------------------------------*/
+
+.main-banner {
+	margin-top: 20px;
+	padding: 16px 24px;
+	background: #e6e6e6;
+}
+
+#content .banner-items {
+	margin: 0;
+	list-style: none;
+}
+
+.banner-item {
+	width: 192px;
+	height: 192px;
+	padding: 4px;
+	float: left;
+	position: relative;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+	background: #fff;
+}
+.banner-item::before {
+	width: 182px;
+	height: 182px;
+	display: block;
+	position: absolute;
+	top: 4px;
+	left: 4px;
+	content: '';
+	-webkit-box-shadow: inset 0 0 20px #2a2a2a;
+	box-shadow: inset 0 0 20px #2a2a2a;
+	z-index: 1;
+}
+
+.banner-4col .banner-item {
+	margin-left: 48px;
+}
+.banner-4col .banner-item:first-child {
+	margin-left: 0;
+}
+.banner-3col .banner-item {
+	margin-left: 128px;
+}
+.banner-3col .banner-item:first-child {
+	margin-left: 40px;
+}
+.banner-2col .banner-item {
+	margin-left: 208px;
+}
+.banner-2col .banner-item:first-child {
+	margin-left: 160px;
+}
+.banner-1col .banner-item {
+	margin-left: 360px;
+}
+
+.banner-img {
+	width: 100%;
+	height: 100%;
+	display: block;
+	position: relative;
+}

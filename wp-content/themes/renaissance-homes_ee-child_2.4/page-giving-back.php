@@ -11,6 +11,40 @@ the_post();
 
 	<div id="content" class="clearfix fullwidth">
 		<div id="main-area">
+			<?php
+			$banners = array();
+			array_push( $banners, get_field( 'banner_img_01' ) );
+			array_push( $banners, get_field( 'banner_img_02' ) );
+			array_push( $banners, get_field( 'banner_img_03' ) );
+			array_push( $banners, get_field( 'banner_img_04' ) );
+			array_push( $banners, get_field( 'banner_img_05' ) );
+
+			$banners = array_slice( array_filter( $banners ), 0, 4 );
+			$num_banners = sizeof( $banners );
+			echo "<!-- the number of banners is " . $num_banners . " -->";
+
+			// if banners exist, set number of columns. not set == no banner area
+			if ( $num_banners > 0 ) {
+				if ( $num_banners >= 4 ) {
+					$cols = "4col";
+				} else {
+					$cols = $num_banners . "col";
+				}
+			}
+
+			if( isset( $cols ) ) {
+			?>
+			<div class="main-banner banner-<?php echo $cols; ?> clearfix">
+				<ul class="banner-items">
+				<?php
+				foreach($banners as $b) { ?>
+					<li class="banner-item">
+						<img class="banner-img" src="<?php echo $b['url']; ?>" alt="<?php echo $b['alt']; ?>">
+					</li>
+				<?php } ?>
+				</ul>
+			</div>
+			<?php } // end banners ?>
 			<div class="main_entry">
 				<h2 class="main_entry_title"><?php the_title(); ?></h2>
 				<?php the_content(); ?>
