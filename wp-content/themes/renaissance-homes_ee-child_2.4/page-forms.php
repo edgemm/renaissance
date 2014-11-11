@@ -244,21 +244,9 @@ Template Name: Lasso Form 2
 
 <br>
 
-<input type="checkbox" name="Rosemont" value="66775" />
-
-Rosemont Pointe – West Linn
-
-<br>
-
 <input type="checkbox" name="Sherwood" value="98896" />
 
 Renaissance at Rychlick Farm - Sherwood
-
-<br>
-
-<input type="checkbox" name="Wilsonville" value="128348" />
-
-Renaissance Boat Club - Wilsonville
 
 <br>
 
@@ -268,13 +256,23 @@ Renaissance at Stono 93 - Tualatin
 
 <br>
 
+<input type="checkbox" name="Wilsonville" value="128348" />
+
+Renaissance Boat Club - Wilsonville
+
+<br>
+
+<input type="checkbox" name="WestLinn" value="151172" />
+
+Renaissance at Grandview, West Linn
+
+<br>
+
 <input type="checkbox" name="Other" value="66774" />
 
 Other <input type="text" name="OtherBox" value="" maxlength="5000" size="30" />
 
 </p> 
-
-
 
 <p><strong>Is  there something specific you are looking for in your next home?</strong><br />
 

@@ -21,7 +21,6 @@ the_post();
 
 			$banners = array_slice( array_filter( $banners ), 0, 4 );
 			$num_banners = sizeof( $banners );
-			echo "<!-- the number of banners is " . $num_banners . " -->";
 
 			// if banners exist, set number of columns. not set == no banner area
 			if ( $num_banners > 0 ) {
