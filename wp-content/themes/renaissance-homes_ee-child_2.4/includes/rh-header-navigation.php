@@ -2,7 +2,7 @@
 				<a href="<?php bloginfo('url'); ?>"><?php $logo = (get_option('elegantestate_logo') <> '') ? get_option('elegantestate_logo') : get_bloginfo('template_directory').'/images/logo.png'; ?>
 	  <img src="<?php echo $logo; ?>" class="rh-logo" alt="Logo" /></a>
 	  
-				<span class="contact-slogan">Call 888.529.0509 to speak with us now.</span>
+				<span class="contact-slogan">Call 503.636.5600 to speak with us now.</span>
 				
 				<ul class="extraNav">
 					<li class="extraNav-item extraNav-search">

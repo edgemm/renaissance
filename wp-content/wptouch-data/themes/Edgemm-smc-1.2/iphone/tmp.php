@@ -2,6 +2,7 @@
 $et_price = isset($custom["price"][0]) ? $custom["price"][0] : '';
 if ($et_price <> '') $et_price = get_option('elegantestate_cur_sign') . $et_price;
 $et_description = isset($custom["description"][0]) ? $custom["description"][0] : '';
+
 $et_property_type = isset($custom["et_property_type"][0]) ? $custom["et_property_type"][0] : '';
 $et_bedrooms_number = isset($custom["et_bedrooms_number"][0]) ? $custom["et_bedrooms_number"][0] : '';
 $et_bathrooms_number = isset($custom["et_bathrooms_number"][0]) ? $custom["et_bathrooms_number"][0] : '';
@@ -10,19 +11,23 @@ $et_square_footage = isset($custom["et_square_footage"][0]) ? $custom["et_square
 
 $et_band =  isset($custom["et_band"][0]) ? $custom["et_band"][0] : '';
 
+
 $integrate_gmaps = ( isset($custom["integrate_gmaps"][0]) && $custom["integrate_gmaps"][0] == 1 ) ? true : false;
 /*$latidude = isset($custom["et_latitude"][0]) ? $custom["et_latitude"][0] : '40.713279732514515';
 $longtitude = isset($custom["et_longtitude"][0]) ? $custom["et_longtitude"][0] : '-74.00542840361595'; */
 $et_address = isset($custom["et_address"][0]) ? $custom["et_address"][0] : '270 Park Ave. New York';
 
 $custom["thumbs"] = unserialize($custom["thumbs"][0]); ?>
+
+
   <div id="breadcrumbs-smc">
-  <a href="/">Home</a> <span class="separate">&raquo;</span> <a href="<?php $categories = get_the_category();
+  <a href="/index.php">Home</a> <span class="separate">&raquo;</span> <a href="<?php $categories = get_the_category();
 $cat_slug = $categories[0]->slug;
 echo "$cat_slug"; ?>"><?php
 $category = get_the_category(); 
 echo $category[0]->cat_name;
 ?></a>
+
 
 
 
@@ -32,6 +37,7 @@ echo $category[0]->cat_name;
 <?php if ($et_band <> '') { ?>
    <span class="band<?php echo(' '.$et_band); ?>"></span>
 <?php }; ?>
+
 
 
 <?php if (!empty($custom["thumbs"])) { ?>
@@ -47,23 +53,8 @@ echo $category[0]->cat_name;
          <?php }; ?>
       </div> <!-- #product-slides -->
       
-
       <?php if ($et_price <> '') { ?>
-         <span class="price2"><span><?php the_field('callout-text'); ?> <?php
- 
-if(get_field('hide_price'))
-{
-	
-	
-	
-}
-else {
-   if ( is_numeric( $et_price ) ) {
-      echo prettyPrice($et_price);
-   } else {
-      echo $et_price;
-   }
-} ?></span></span>
+         <span class="price2"><span><?php echo($et_price); ?></span></span>
       <?php }; ?>
    </div> <!-- #product-slider -->
 <?php }; ?>
@@ -101,6 +92,7 @@ else {
       
          </div> <!-- .description -->
 
+
    </div> <!-- .product-types -->
    <p></p>
    
@@ -110,52 +102,44 @@ else {
 </div> <!-- #product-info -->
 
 <!-- #smc menu's -->
-<!--This array of numbers for categories you do not want to have any buttons-->
-<?php if ( in_category( array( 105, 64) ) ) { ?>
+
+<?php if ( in_category(105) ) { ?>
+
 <?php } else { ?>
 <div class="post-menu-smc">
 
     <h1 class="title-smc">Neighborhood Links</h1>
 
-<!--This array of numbers for categories you do not want to have a MIR button-->
 
-<p>
-<?php if ( in_category( array( 92, 169, 172, 681 ) ) ) { ?>
-<?php } else { ?>
-			    <a href="/category/<?php $categories = get_the_category();
+                          <p><a href="/category/<?php $categories = get_the_category();
 $cat_slug = $categories[0]->slug;
 echo "$cat_slug"; ?>+quick-move-ins" class="readmore-smc"><span>Move-In Ready</span></a>
-<?php } ?>
 
-<?php
-//if ( !in_category( array( 123 ) ) ) { ?>
 <a href="/category/<?php $categories = get_the_category();
 $cat_slug = $categories[0]->slug;
-echo "$cat_slug"; ?>+floor-plans" class="readmore-smc"><span>Available Floorplans</span></a>
-<?php if( !in_category( 681 ) ) : ?>
+echo "$cat_slug"; ?>+floor-plans" class="readmore-smc"><span>Available Floorplans</span>></a>
+
 <a href="/amenities/<?php $categories = get_the_category();
 $cat_slug = $categories[0]->slug;
-echo "$cat_slug"; ?>-included-finishes-and-features" class="readmore-smc"><span>Amenities</span></a>
-<?php endif; ?>
+echo "$cat_slug"; ?>-included-finishes-and-features" class="readmore-smc"><span>Amenities</span></a></p> 
 
 <a href=/contact-agent class="readmore-smc"><span>Contact Agent</span></a></p>
                           
                           
-
+                                                       
                           
 </div>
 <?php } ?>
 
 
+
                           
+
 
 
 <div class="clear"></div>
 
 <?php if (count($custom["thumbs"]) > 1) { ?>
-</div>
-</div>
-<div class="post2 clearfix">
    <div id="product-thumbs" class="clearfix">
       <div id="product-thumb-items">
          <div id="smallthumbs">
@@ -172,110 +156,73 @@ echo "$cat_slug"; ?>-included-finishes-and-features" class="readmore-smc"><span>
    </div> <!-- #product-thumbs -->
 <?php }; ?>
 
-<!-- start smc floorplan code-->
-<?php
-$buttonlink_smc = get_field('floorplan_smc');
-$buttonname_smc = get_field('floorplan_name');
-if(get_field('floorplan_smc')){?>
-<h2><?php the_field('listing_sub_title'); ?></h2>
-    
-<?php /*?><?php echo do_shortcode('[button id="button-fix" link="' . $buttonlink_smc . '" color="silver" newwindow="yes"] ' . $buttonname_smc . '[/button]'); ?>
-<?php */?>
-<a class="smallsilver2" id="button-fix2" target="blank" href="<?php echo $buttonlink_smc; ?>" onclick="_gaq.push(['_trackEvent', 'click', 'floorplan', 'floorplan button']);">View <?php echo $buttonname_smc; ?></a>
-<?php } else { ?>   
-<?php }; ?>
-<!-- end smc floorplan code-->
-
 <?php the_content(); ?>
-
-<!-- start smc contact code-->
- <?php 
-            if(get_field('agent_email'))
-{ ?>
-	
-    <h4><strong>Contact</strong></h4>
-              
-               <p><?php the_field('agent_name'); ?> | <a onclick="_gaq.push(['_trackEvent', 'click', 'emails', 'agent-email']);" href="mailto:<?php the_field('agent_email'); ?>"><?php the_field('agent_email'); ?></a> | <a onclick="_gaq.push(['_trackEvent', 'click', 'calls', 'agent-call']);" href="tel:<?php the_field('agent_phone'); ?>"><?php the_field('agent_phone'); ?></a>
-               
-               
-<?php 
-            if(get_field('mls'))
-{ ?>
-               
-                | MLS# <?php the_field('mls'); ?>
-    
-<?php }?></p>
-<?php } ?>               
-               
-               
-               
-<?php 
-            if(get_field('second_agent_email'))
-{ ?>
-	
-              
-               <p><?php the_field('second_agent_name'); ?> | <a onclick="_gaq.push(['_trackEvent', 'click', 'emails', 'agent-email']);" href="mailto:<?php the_field('second_agent_email'); ?>"><?php the_field('second_agent_email'); ?></a> | <a onclick="_gaq.push(['_trackEvent', 'click', 'calls', 'agent-call']);" href="tel:<?php the_field('second_agent_phone'); ?>"><?php the_field('second_agent_phone'); ?></a>
-               
-               <?php 
-            if(get_field('mls'))
-{ ?>
-               
-               
-               
-                | MLS# <?php the_field('mls'); ?>
-          
-<?php } ?></p>
-<?php } ?>
-<!-- end smc contact code-->
-
-<?php // display related posts if box is not checked - gfh
-if ( !get_field( 'show_related_content' ) ) { ?>
-<div class="related clearfix">
-        <h3 class="related-headline">Related Content</h3>
-        <div class="related-posts">
-<?php
-        $args = array(
-                'post_type'		=> 'post',
-                'category__not_in'	=> array( 136, 281 ),
-                'orderby'      		=> 'rand',
-                'posts_per_page' 	=> 5
-        );
-
-        remove_all_filters('posts_orderby');
-        $the_query = new WP_Query( $args );
-
-        if ($the_query->have_posts()) {
-                while ( $the_query->have_posts() ) :
-                        $the_query->the_post();
-                        include( locate_template( 'includes/entry-related-post.php' ) );					
-                endwhile;
-        }
-?>
-        </div>
-</div>
-<?php
-wp_reset_query();
-}
-?>
 <div class="clear"></div>
 
-<?php $geocode=file_get_contents('http://maps.google.com/maps/api/geocode/json?address='.str_replace(" ", "+", $et_address).'&sensor=false');
-
-$output= json_decode($geocode);
-
-$lat = $output->results[0]->geometry->location->lat;
-$long = $output->results[0]->geometry->location->lng;
-
-?>
-
 <?php if ($integrate_gmaps) { ?>
-<?php $price_clean = array("COMING SOON", "SOLD", "Sold", "coming soon", "Coming Soon", "sold"); ?>
-<?php echo do_shortcode( '[srp_profile lat="' . $lat . '" lng="' . $long . '" address="' . $et_address . '" listing_price="'.str_replace($price_clean, "", $et_price).'"]' ) ?>
-   
-   
-   <?php }; ?>
-<div class="addtoany_share_save_container">
-<?php if( function_exists('ADDTOANY_SHARE_SAVE_KIT') ) { ADDTOANY_SHARE_SAVE_KIT(); } ?>
-</div>
+   <div id="gmaps-border">
+      <div id="gmaps-container"></div>
+   </div> <!-- end #gmaps-border -->
+
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3.1&sensor=true"></script>
+   <script type="text/javascript">
+      //<![CDATA[
+      var map;
+      var geocoder;
+
+      initialize();
+
+      function initialize() {
+         geocoder = new google.maps.Geocoder();
+         geocoder.geocode({
+            'address': '<?php echo $et_address; ?>',
+            'partialmatch': true}, geocodeResult);   
+      }
+
+      function geocodeResult(results, status) {
+         
+         if (status == 'OK' && results.length > 0) {         
+            var latlng = new google.maps.LatLng(results[0].geometry.location.b,results[0].geometry.location.c);
+			var myOptions = {
+			   zoom: 10,
+			   center: results[0].geometry.location,
+			   mapTypeId: google.maps.MapTypeId.ROADMAP
+			};
+			
+			map = new google.maps.Map(document.getElementById("gmaps-container"), myOptions);
+			   var marker = new google.maps.Marker({
+			   position: results[0].geometry.location,
+			   map: map,
+			   title:"<?php the_title(); ?>"
+			});
+
+            var contentString = '<div id="content">'+
+            '<h3 id="firstHeading" class="firstHeading" style="padding-bottom: 15px;">'+marker.title+'</h3>'+
+            '<div id="bodyContent">'+
+            '<p><a target="_blank" href="http://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q='+escape(results[0].formatted_address)+'&amp;ie=UTF8&amp;view=map">'+results[0].formatted_address+'</a>'+
+            '</p>'+
+            '</div>'+
+            '</div>';
+            //&amp;sll=29.67226,-94.873971
+
+            var infowindow = new google.maps.InfoWindow({
+               content: contentString,
+               maxWidth: 300
+            });
+
+            google.maps.event.addListener(marker, 'click', function() {
+               infowindow.open(map,marker);
+            });
+
+            google.maps.event.trigger(marker, "click");
+
+         } else {
+            //alert("Geocode was not successful for the following reason: " + status);
+         }
+      }
+      //]]>
+   </script>
+<?php }; ?>
+
 <?php wp_link_pages(array('before' => '<p><strong>'.__('Pages','ElegantEstate').':</strong> ', 'after' => '</p>', 'next_or_number' => 'number')); ?>
 <?php edit_post_link(__('Edit this page','ElegantEstate')); ?>
