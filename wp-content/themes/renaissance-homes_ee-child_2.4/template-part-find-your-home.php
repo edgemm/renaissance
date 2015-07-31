@@ -118,7 +118,7 @@ update_post_meta( $post->ID, 'geo_long', $long );
 
 
 
-['<b>Neighborhood</b><br><h5><a href="<?php the_permalink(); ?>"><?php the_title() ?></a></h5><p><? echo prettyPrice($smc_price); ?></p>', <? echo $lat; ?>,<? echo $long; ?>, '/wp-content/uploads/2012/06/neighborhood-mark.png'],
+["<b>Neighborhood</b><br><h5><a href='<?php the_permalink(); ?>'><?php the_title() ?></a></h5><p><? echo prettyPrice($smc_price); ?></p>", <? echo $lat; ?>,<? echo $long; ?>, "/wp-content/uploads/2012/06/neighborhood-mark.png"],
 
 
 <?php endforeach;
@@ -203,7 +203,7 @@ function setMarkers(map, locations) {
 
 <script type="text/javascript">
     window.onload = function () {
-	console.log( locations );
+	//console.log( locations );
         initialize();
     }
      

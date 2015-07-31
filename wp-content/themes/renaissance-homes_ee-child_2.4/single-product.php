@@ -15,18 +15,28 @@ $integrate_gmaps = ( isset($custom["integrate_gmaps"][0]) && $custom["integrate_
 $longtitude = isset($custom["et_longtitude"][0]) ? $custom["et_longtitude"][0] : '-74.00542840361595'; */
 $et_address = isset($custom["et_address"][0]) ? $custom["et_address"][0] : '270 Park Ave. New York';
 
-$custom["thumbs"] = unserialize($custom["thumbs"][0]); ?>
+$custom["thumbs"] = unserialize($custom["thumbs"][0]);
+
+// collect categories of all neighborhoods
+$neighborhoods = array( 4, 165 ); // Neighborhood category IDs, include Metro and Vintage (not children of Neighborhood category)
+$neighborhood_children = get_categories( array( 'child_of' => 137 ) );
+foreach( $neighborhood_children as $c ) :
+   array_push( $neighborhoods, $c->term_id );
+endforeach;
+
+$categories = get_the_category();
+//$cat_ignore = array( 5, 9, 19, 62, 137 ); // categories: _Feature, _Move-in Ready, _Floor Plans, _Facebook, _Neighborhoods
+// properly select neightborhood category
+foreach( $categories as $c ) :
+   if( in_array( $c->term_id, $neighborhoods ) ) :
+      $cat_name = $c->cat_name;
+      $cat_slug = $c->slug;
+   endif;
+endforeach;
+
+?>
   <div id="breadcrumbs-smc">
-  <a href="/">Home</a> <span class="separate">&raquo;</span> <a href="<?php $categories = get_the_category();
-$cat_slug = $categories[0]->slug;
-echo "$cat_slug"; ?>"><?php
-$category = get_the_category(); 
-echo $category[0]->cat_name;
-?></a>
-
-
-
-    
+  <a href="/">Home</a> <span class="separate">&raquo;</span> <a href="<?php echo "$cat_slug"; ?>"><?php echo $cat_name; ?></a>
       </div> <!-- .end smc breadcrumbs -->
 
 <?php if ($et_band <> '') { ?>
@@ -122,20 +132,14 @@ else {
 <p>
 <?php if ( in_category( array( 92, 169, 172, 681 ) ) ) { ?>
 <?php } else { ?>
-			    <a href="/category/<?php $categories = get_the_category();
-$cat_slug = $categories[0]->slug;
-echo "$cat_slug"; ?>+quick-move-ins" class="readmore-smc"><span>Move-In Ready</span></a>
+<a href="/category/<?php echo "$cat_slug"; ?>+quick-move-ins" class="readmore-smc"><span>Move-In Ready</span></a>
 <?php } ?>
 
 <?php
 //if ( !in_category( array( 123 ) ) ) { ?>
-<a href="/category/<?php $categories = get_the_category();
-$cat_slug = $categories[0]->slug;
-echo "$cat_slug"; ?>+floor-plans" class="readmore-smc"><span>Available Floorplans</span></a>
+<a href="/category/<?php echo "$cat_slug"; ?>+floor-plans" class="readmore-smc"><span>Available Floorplans</span></a>
 <?php if( !in_category( 681 ) ) : ?>
-<a href="/amenities/<?php $categories = get_the_category();
-$cat_slug = $categories[0]->slug;
-echo "$cat_slug"; ?>-included-finishes-and-features" class="readmore-smc"><span>Amenities</span></a>
+<a href="/amenities/<?php echo "$cat_slug"; ?>-included-finishes-and-features" class="readmore-smc"><span>Amenities</span></a>
 <?php endif; ?>
 
 <a href=/contact-agent class="readmore-smc"><span>Contact Agent</span></a></p>
